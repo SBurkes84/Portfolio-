@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
     <title>Shequila Sledge - E-Commerce Lectures and Resources</title>
     <meta name="description" content="E-Commerce and Information Technology Lectures">
     <meta name="keywords" content="E-Commerce, HTML, CSS, PHP ,JavaScript">
-    <meta name="author" content="Bruce Bauer">
+    <meta name="author" content="Shequila Sledge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- See https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp-->
