@@ -1,10 +1,9 @@
-# portfolio
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Bruce Bauer - E-Commerce Lectures and Resources</title>
+    <title>Shequila Sledge - E-Commerce Lectures and Resources</title>
     <meta name="description" content="E-Commerce and Information Technology Lectures">
     <meta name="keywords" content="E-Commerce, HTML, CSS, PHP ,JavaScript">
     <meta name="author" content="Bruce Bauer">
