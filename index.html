@@ -234,6 +234,141 @@
   <!-- Web Projects Section -->
 <div id="WebProject" class="container fade-in">
     <h1>Web Projects</h1>
+    <!-- Currency Value History -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Currency Value History</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    label, select, input {
+      display: block;
+      margin: 10px 0;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Currency Value History</h1>
+
+  <label>Base Currency:
+    <select id="baseCurrency">
+      <option value="">Select a Currency...</option>
+      <option value="USD">US Dollar</option>
+      <option value="EUR">Euro</option>
+      <option value="JPY">Japanese Yen</option>
+      <option value="GBP">Great Britain Pound</option>
+      <option value="AUD">Australian Dollar</option>
+    </select>
+    <span id="baseError" class="error"></span>
+  </label>
+
+  <label>Convert to Currency:
+    <select id="targetCurrency">
+      <option value="">Select a Currency...</option>
+      <option value="USD">US Dollar</option>
+      <option value="EUR">Euro</option>
+      <option value="JPY">Japanese Yen</option>
+      <option value="GBP">Great Britain Pound</option>
+      <option value="AUD">Australian Dollar</option>
+    </select>
+    <span id="targetError" class="error"></span>
+  </label>
+
+  <label>From Date:
+    <input type="date" id="fromDate">
+    <span id="fromDateError" class="error"></span>
+  </label>
+
+  <label>To Date:
+    <input type="date" id="toDate">
+    <span id="toDateError" class="error"></span>
+  </label>
+
+  <button onclick="fetchCurrencyData()">Show Results</button>
+  <button onclick="clearForm()">Clear</button>
+
+  <canvas id="chartjs-0" width="600" height="400"></canvas>
+
+  <script>
+    function clearForm() {
+      document.getElementById('baseCurrency').value = '';
+      document.getElementById('targetCurrency').value = '';
+      document.getElementById('fromDate').value = '';
+      document.getElementById('toDate').value = '';
+      document.getElementById('baseError').textContent = '';
+      document.getElementById('targetError').textContent = '';
+      document.getElementById('fromDateError').textContent = '';
+      document.getElementById('toDateError').textContent = '';
+      const ctx = document.getElementById("chartjs-0").getContext('2d');
+      if (window.myChart) window.myChart.destroy();
+    }
+
+    async function fetchCurrencyData() {
+      const base = document.getElementById('baseCurrency').value;
+      const target = document.getElementById('targetCurrency').value;
+      const fromDate = document.getElementById('fromDate').value;
+      const toDate = document.getElementById('toDate').value;
+
+      let valid = true;
+      if (!base) {
+        document.getElementById('baseError').textContent = 'Base Currency is Required';
+        valid = false;
+      } else document.getElementById('baseError').textContent = '';
+
+      if (!target) {
+        document.getElementById('targetError').textContent = 'Convert To Currency is Required';
+        valid = false;
+      } else document.getElementById('targetError').textContent = '';
+
+      if (!fromDate) {
+        document.getElementById('fromDateError').textContent = 'From Date is Required';
+        valid = false;
+      } else document.getElementById('fromDateError').textContent = '';
+
+      if (!toDate) {
+        document.getElementById('toDateError').textContent = 'To Date is Required';
+        valid = false;
+      } else document.getElementById('toDateError').textContent = '';
+
+      if (!valid) return;
+
+      const API_KEY = 'YOUR_API_KEY'; // Replace this!
+      const url = `https://api.polygon.io/v2/aggs/ticker/C:${base}${target}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=120&apiKey=${API_KEY}`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      const dates = data.results.map(entry => new Date(entry.t).toLocaleDateString());
+      const values = data.results.map(entry => entry.c);
+
+      const ctx = document.getElementById("chartjs-0").getContext('2d');
+      if (window.myChart) window.myChart.destroy();
+      window.myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: dates,
+          datasets: [{
+            label: `One ${base} to ${target}`,
+            data: values,
+            fill: false,
+            borderColor: 'teal',
+            tension: 0.1
+          }]
+        },
+        options: {
+          responsive: false,
+          maintainAspectRatio: true
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
     <h2>JavaScript Calculator</h2>
     <p>
         This project is a simple calculator built with HTML, CSS, and JavaScript. It performs basic arithmetic operations like addition, subtraction, multiplication, and division. This project demonstrates my ability to build interactive front-end applications and use JavaScript for logic and DOM manipulation.
@@ -241,6 +376,19 @@
     <a href="programming-1/index.html" target="_blank">View Calculator</a>
     <br><br>
     <img src="calculator-screenshot.png" alt="Calculator Screenshot" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px;">
+</div>
+<!-- UV Exposure Tracker Project -->
+<div class="container fade-in">
+    <h1>System Design: UV Exposure & Weather Tracker</h1>
+    <p>
+        This project was developed for the South Skin Cancer Treatment Center of America. The tool allows users to track daily UV exposure, receive health warnings, and view weekly forecasts through a user-friendly interface.
+    </p>
+    <p>
+        It uses <strong>Chart.js</strong> for dynamic data visualization and <strong>Open-Meteo API</strong> for location-based weather and UV index data. Educational tooltips and alerts guide users on safe UV exposure levels.
+    </p>
+    <img src="605811c2-a5cd-4638-823a-e15077fab048.png" alt="UV Exposure Tracker Design" style="max-width: 100%; height: auto; border: 1px solid #ccc; border-radius: 8px; margin-top: 10px;">
+    <br><br>
+    <a href="uv-tracker/index.html" target="_blank">View Live Demo</a> <!-- Replace with actual folder if applicable -->
 </div>
 
 
